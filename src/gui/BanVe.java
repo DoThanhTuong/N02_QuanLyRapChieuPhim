@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
@@ -13,7 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 public class BanVe extends JFrame {
     // kích thước cửa sổ chuẩn cho chương trình
@@ -21,9 +24,7 @@ public class BanVe extends JFrame {
     private JButton btnBanBapNuoc;
     private JButton btnXemThongKe;
     private JButton btnTaiKhoan;
-    private JButton btnLogOut;
-    private JButton btnHelp;
-    private JButton btnClose;
+    private JButton btnDatVe;
     private JButton btnPhim, btnNhanVien, btnLichChieu;
     private Font fCmpName;
     private Font fBtnName;
@@ -31,6 +32,9 @@ public class BanVe extends JFrame {
     private JComboBox cb_phong;
     private JComboBox cb_suatChieu;
     private JButton btn_chonGhe;
+    private JTextField txt_tenPhim, txt_tenPhong, txt_thoiLuong, txt_theLoai, txt_thoiGian, txt_soGhe;
+    private JButton btnHome;
+    private JButton btnDeleteAll;
 
     public BanVe() {
         super("Absolution Cinema");
@@ -123,6 +127,8 @@ public class BanVe extends JFrame {
 
         // pCenter
         JPanel pCenter = new JPanel(new BorderLayout());
+        JPanel pCen_north_clone = new JPanel();
+        pCen_north_clone.setLayout(new BoxLayout(pCen_north_clone, BoxLayout.Y_AXIS));
         JPanel pCen_north = new JPanel();
         pCen_north.setLayout(new BoxLayout(pCen_north, BoxLayout.Y_AXIS));
         pCen_north.setBorder(BorderFactory.createTitledBorder("CHỌN VÉ XEM PHIM"));
@@ -131,7 +137,8 @@ public class BanVe extends JFrame {
         JLabel lbl_phim = new JLabel("Chọn phim:              ");
 
         // Tạo 1 danh sách phim tạm thời
-        Object[] danhSachPhim = { "Mưa đỏ", "Chị ngã em nâng", "Tết ở làng địa ngục", "Kimetsu no yaiba" };
+        Object[] danhSachPhim = { "---Chọn phim---", "Mưa đỏ", "Chị ngã em nâng", "Tết ở làng địa ngục",
+                "Kimetsu no yaiba" };
         cb_phim = new JComboBox<>(danhSachPhim);
         pPhim.add(lbl_phim);
         pPhim.add(cb_phim);
@@ -140,7 +147,7 @@ public class BanVe extends JFrame {
         pPhong.setLayout(new BoxLayout(pPhong, BoxLayout.X_AXIS));
         JLabel lbl_phong = new JLabel("Chọn phòng:            ");
         // Tạo 1 danh sách phòng tạm thời trong lúc đợi Tâm push cái code của nó lên
-        Object[] danhSachPhong = { "Phòng 1", "Phòng 2", "Phòng 3", "Phòng 4" };
+        Object[] danhSachPhong = { "---Chọn phòng---", "Phòng 1", "Phòng 2", "Phòng 3", "Phòng 4" };
         cb_phong = new JComboBox<>(danhSachPhong);
         pPhong.add(lbl_phong);
         pPhong.add(cb_phong);
@@ -149,7 +156,8 @@ public class BanVe extends JFrame {
         pSuatChieu.setLayout(new BoxLayout(pSuatChieu, BoxLayout.X_AXIS));
         JLabel lbl_suatChieu = new JLabel("Chọn suất chiếu:    ");
         // Tạo 1 danh sách phòng tạm thời trong lúc đợi Tâm push cái code của nó lên
-        Object[] danhSachSuatChieu = { "05-10-2025T6:30", "05-10-2025T7:20", "05-10-2025T9:30", "05-10-2025T18:30" };
+        Object[] danhSachSuatChieu = { "---Chọn suất chiếu---", "05-10-2025T6:30", "05-10-2025T7:20", "05-10-2025T9:30",
+                "05-10-2025T18:30" };
         cb_suatChieu = new JComboBox<>(danhSachSuatChieu);
         // button chọn ghế
         btn_chonGhe = new JButton("Chọn ghế");
@@ -167,7 +175,79 @@ public class BanVe extends JFrame {
         pCen_north.add(Box.createVerticalStrut(10));
         pCen_north.add(pSuatChieu);
         pCen_north.add(Box.createVerticalStrut(10));
-        pCenter.add(pCen_north, BorderLayout.NORTH);
+        pCen_north_clone.add(Box.createVerticalStrut(20));
+        pCen_north_clone.add(pCen_north);
+        pCen_north_clone.add(Box.createVerticalStrut(30));
+        pCenter.add(pCen_north_clone, BorderLayout.NORTH);
+
+        // Thông tin vé
+        JPanel pCen_Center = new JPanel();
+        pCen_Center.setLayout(new BoxLayout(pCen_Center, BoxLayout.Y_AXIS));
+        pCen_Center.setBorder(BorderFactory.createTitledBorder("THÔNG TIN VÉ"));
+
+        JPanel pTenPhim = new JPanel();
+        pTenPhim.setLayout(new BoxLayout(pTenPhim, BoxLayout.X_AXIS));
+        JLabel lbl_tenPhim = new JLabel("Tên phim:      ");
+        txt_tenPhim = new JTextField();
+        txt_tenPhim.setEditable(false);
+        pTenPhim.add(lbl_tenPhim);
+        pTenPhim.add(txt_tenPhim);
+
+        JPanel pSoPhong = new JPanel();
+        pSoPhong.setLayout(new BoxLayout(pSoPhong, BoxLayout.X_AXIS));
+        JLabel lbl_soPhong = new JLabel("Số phòng:      ");
+        txt_tenPhong = new JTextField();
+        txt_tenPhong.setEditable(false);
+        pSoPhong.add(lbl_soPhong);
+        pSoPhong.add(txt_tenPhong);
+
+        JPanel pThoiLuong = new JPanel();
+        pThoiLuong.setLayout(new BoxLayout(pThoiLuong, BoxLayout.X_AXIS));
+        JLabel lbl_thoiLuong = new JLabel("Thời lượng:  ");
+        txt_thoiLuong = new JTextField();
+        txt_thoiLuong.setEditable(false);
+        pThoiLuong.add(lbl_thoiLuong);
+        pThoiLuong.add(txt_thoiLuong);
+
+        JPanel pTheLoai = new JPanel();
+        pTheLoai.setLayout(new BoxLayout(pTheLoai, BoxLayout.X_AXIS));
+        JLabel lbl_theLoai = new JLabel("Thể loại:         ");
+        txt_theLoai = new JTextField();
+        txt_theLoai.setEditable(false);
+        pTheLoai.add(lbl_theLoai);
+        pTheLoai.add(txt_theLoai);
+
+        JPanel pThoiGian = new JPanel();
+        pThoiGian.setLayout(new BoxLayout(pThoiGian, BoxLayout.X_AXIS));
+        JLabel lbl_thoiGian = new JLabel("Thời gian:      ");
+        txt_thoiGian = new JTextField();
+        txt_thoiGian.setEditable(false);
+        pThoiGian.add(lbl_thoiGian);
+        pThoiGian.add(txt_thoiGian);
+
+        JPanel pSoGhe = new JPanel();
+        pSoGhe.setLayout(new BoxLayout(pSoGhe, BoxLayout.X_AXIS));
+        JLabel lbl_soGhe = new JLabel("Số ghế:           ");
+        txt_soGhe = new JTextField();
+        txt_soGhe.setEditable(false);
+        pSoGhe.add(lbl_soGhe);
+        pSoGhe.add(txt_soGhe);
+
+        pCen_Center.add(Box.createVerticalStrut(15));
+        pCen_Center.add(pTenPhim);
+        pCen_Center.add(Box.createVerticalStrut(15));
+        pCen_Center.add(pSoPhong);
+        pCen_Center.add(Box.createVerticalStrut(15));
+        pCen_Center.add(pThoiLuong);
+        pCen_Center.add(Box.createVerticalStrut(15));
+        pCen_Center.add(pThoiGian);
+        pCen_Center.add(Box.createVerticalStrut(15));
+        pCen_Center.add(pTheLoai);
+        pCen_Center.add(Box.createVerticalStrut(15));
+        pCen_Center.add(pSoGhe);
+        pCen_Center.add(Box.createVerticalStrut(15));
+
+        pCenter.add(pCen_Center, BorderLayout.CENTER);
 
         // add sự kiện
         btnBanVe.addActionListener(e -> UIManager.OpenBanVeUI(this));
@@ -177,19 +257,35 @@ public class BanVe extends JFrame {
         btnLichChieu.addActionListener(e -> UIManager.OpenLichChieuUI(this));
         btnNhanVien.addActionListener(e -> UIManager.OpenNhanVienUI(this));
         btnPhim.addActionListener(e -> UIManager.OpenDanhSachPhimUI(this));
-
         // pSouth
         JPanel pSouth = new JPanel();
-        btnLogOut = new JButton("Đăng xuất");
-        btnHelp = new JButton("Trợ giúp");
-        btnClose = new JButton("Đóng");
-        pSouth.add(btnLogOut);
-        pSouth.add(btnHelp);
-        pSouth.add(btnClose);
-        // add sự kiện
-        btnLogOut.addActionListener(e -> logout());
-        btnHelp.addActionListener(e -> help());
-        btnClose.addActionListener(e -> System.exit(0));
+        pSouth.setLayout(new BoxLayout(pSouth, BoxLayout.Y_AXIS));
+        JPanel pSouthButton = new JPanel();
+        pSouthButton.add(Box.createHorizontalStrut(150));
+        pSouthButton.setLayout(new BoxLayout(pSouthButton, BoxLayout.X_AXIS));
+        // btn Quay về trang chủ
+        btnHome = new JButton("Trang chủ");
+        btnHome.setFont(fBtnName);
+        btnHome.addActionListener(e -> UIManager.OpenHomeUI(this));
+        pSouthButton.add(btnHome);
+        pSouthButton.add(Box.createHorizontalStrut(10));
+        // btn Xóa lựa chọn
+        btnDeleteAll = new JButton("Xóa lựa chọn");
+        btnDeleteAll.setFont(fBtnName);
+        btnDeleteAll.addActionListener(e -> DeleteAllChoosen());
+        pSouthButton.add(btnDeleteAll);
+        pSouthButton.add(Box.createHorizontalStrut(10));
+        // Button đặt vé
+        btnDatVe = new JButton("Xác nhận đặt vé");
+        btnDatVe.setBackground(Color.GREEN);
+        btnDatVe.setFont(fBtnName);
+        btnDatVe.addActionListener(e -> AcceptOrderTicket());
+        pSouthButton.add(btnDatVe);
+
+        pSouth.add(Box.createVerticalStrut(10));
+        pSouth.add(pSouthButton);
+        pSouth.add(Box.createVerticalStrut(10));
+
         // Thêm vào background chính
         add(pNorth, BorderLayout.NORTH);
         add(pCenter, BorderLayout.CENTER);
@@ -197,21 +293,23 @@ public class BanVe extends JFrame {
         add(pSouth, BorderLayout.SOUTH);
     }
 
-    private void logout() {
-        int result = JOptionPane.showConfirmDialog(this,
-                "Bạn chắc chắn muốn đăng xuất",
-                "Xác nhận đăng xuất",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
-        if (result == JOptionPane.YES_OPTION) {
-            dispose();
-            Login login = new Login();
-            login.setVisible(true);
-        }
+    private void DeleteAllChoosen() {
+        cb_phim.setSelectedIndex(0);
+        cb_phong.setSelectedIndex(0);
+        cb_suatChieu.setSelectedIndex(0);
+        DeleteAllTextField();
     }
 
-    private void help() {
-        String helpText = "Mọi chi tiết xin liên hệ quản lí hệ thống - Minh Tân\nSđt: 0347269410";
-        JOptionPane.showMessageDialog(this, helpText, "Trợ giúp", JOptionPane.INFORMATION_MESSAGE);
+    private void AcceptOrderTicket() {
+
+    }
+
+    private void DeleteAllTextField() {
+        txt_soGhe.setText("");
+        txt_tenPhim.setText("");
+        txt_tenPhong.setText("");
+        txt_theLoai.setText("");
+        txt_thoiGian.setText("");
+        txt_thoiLuong.setText("");
     }
 }
