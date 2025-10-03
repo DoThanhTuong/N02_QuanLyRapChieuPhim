@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,10 +16,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 public class Home extends JFrame {
-    public Dimension sizeConsole = new Dimension(900, 650);
-    private String str_cmpName = "Trang chủ bán vé";
+    // kích thước cửa sổ chuẩn cho chương trình
+    public static Dimension sizeConsole = new Dimension(900, 630);
+    private String str_cmpName = "Hệ thống Absolution Cinema";
     private JButton btnBanVe;
     private JButton btnBanBapNuoc;
     private JButton btnXemThongKe;
@@ -25,105 +29,120 @@ public class Home extends JFrame {
     private JButton btnLogOut;
     private JButton btnHelp;
     private JButton btnClose;
-    private ImageIcon icon_bapNuoc;
-    private Image img_bapNuoc;
-    private ImageIcon icon_acc;
-    private Image img_acc;
-    private ImageIcon icon_banVe;
-    private Image img_banVe;
-    private ImageIcon icon_thongKe;
-    private Image img_thongKe;
+    private JButton btnPhim, btnNhanVien, btnLichChieu;
+
+    public Dimension sizeBtnWest = new Dimension(150, 50);
+    private Font fCmpName;
+    private Font fBtnName;
+    private ImageIcon icon_bg;
+    private JLabel lbl_bg;
 
     public Home() {
-        super("Trang chủ");
+        super("Absolution Cinema");
         setSize(sizeConsole);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setResizable(false);
+        // North
         JPanel pNorth = new JPanel();
         JLabel lbl_cmpName = new JLabel(str_cmpName, SwingConstants.CENTER);
-        Font fCmpName = new Font("Arial", Font.BOLD, 30);
+        fCmpName = new Font("Arial", Font.BOLD, 30);
         lbl_cmpName.setFont(fCmpName);
-        lbl_cmpName.setForeground(Color.red);
+        lbl_cmpName.setForeground(Color.yellow);
         pNorth.add(lbl_cmpName, BorderLayout.CENTER);
-        add(pNorth, BorderLayout.NORTH);
+        pNorth.setBackground(Color.RED);
+        // West
+        JPanel pWest = new JPanel();
+        pWest.setLayout(new BoxLayout(pWest, BoxLayout.X_AXIS));
+        pWest.setBackground(Color.BLACK);
+        JPanel pWest_btn = new JPanel();
+        pWest_btn.setLayout(new BoxLayout(pWest_btn, BoxLayout.Y_AXIS));
+        pWest_btn.setBackground(Color.BLACK);
+        // Create Font for west button
+        fBtnName = new Font("Arial", Font.BOLD, 15);
 
-        JPanel pCenter = new JPanel();
-        pCenter.setLayout(new GridLayout(2, 2, 20, 20));
-        // icon
-        icon_bapNuoc = new ImageIcon(getClass().getResource("/img/icon_bapNuoc.png"));
-        img_bapNuoc = icon_bapNuoc.getImage();
+        btnBanVe = new JButton("Bán vé");
+        btnBanVe.setMaximumSize(sizeBtnWest);
+        btnBanVe.setBackground(Color.RED);
+        btnBanVe.setForeground(Color.WHITE);
+        btnBanVe.setFont(fBtnName);
 
-        icon_acc = new ImageIcon(getClass().getResource("/img/icon_acc.png"));
-        img_acc = icon_acc.getImage();
+        btnBanBapNuoc = new JButton("Bán bắp nước");
+        btnBanBapNuoc.setMaximumSize(sizeBtnWest);
+        btnBanBapNuoc.setBackground(Color.RED);
+        btnBanBapNuoc.setForeground(Color.WHITE);
+        btnBanBapNuoc.setFont(fBtnName);
 
-        icon_banVe = new ImageIcon(getClass().getResource("/img/icon_banVe.jpg"));
-        img_banVe = icon_banVe.getImage();
+        btnXemThongKe = new JButton("Xem thống kê");
+        btnXemThongKe.setMaximumSize(sizeBtnWest);
+        btnXemThongKe.setBackground(Color.RED);
+        btnXemThongKe.setForeground(Color.WHITE);
+        btnXemThongKe.setFont(fBtnName);
 
-        icon_thongKe = new ImageIcon(getClass().getResource("/img/icon_thongKe.jpg"));
-        img_thongKe = icon_thongKe.getImage();
+        btnTaiKhoan = new JButton("Tài khoản");
+        btnTaiKhoan.setMaximumSize(sizeBtnWest);
+        btnTaiKhoan.setBackground(Color.RED);
+        btnTaiKhoan.setForeground(Color.WHITE);
+        btnTaiKhoan.setFont(fBtnName);
 
-        // Tạo nút
-        btnBanVe = new JButton();
-        btnBanBapNuoc = new JButton();
-        btnXemThongKe = new JButton();
-        btnTaiKhoan = new JButton();
-        // set size
-        btnBanBapNuoc.addComponentListener(new java.awt.event.ComponentAdapter() {
-            @Override
-            public void componentResized(java.awt.event.ComponentEvent e) {
-                int w = btnBanBapNuoc.getWidth();
-                int h = btnBanBapNuoc.getHeight();
-                Image scaled = img_bapNuoc.getScaledInstance(w, h, Image.SCALE_SMOOTH);
-                btnBanBapNuoc.setIcon(new ImageIcon(scaled));
-            }
-        });
-        btnTaiKhoan.addComponentListener(new java.awt.event.ComponentAdapter() {
-            @Override
-            public void componentResized(java.awt.event.ComponentEvent e) {
-                int w = btnTaiKhoan.getWidth();
-                int h = btnTaiKhoan.getHeight();
-                Image scaled = img_acc.getScaledInstance(w, h, Image.SCALE_SMOOTH);
-                btnTaiKhoan.setIcon(new ImageIcon(scaled));
-            }
-        });
-        btnBanVe.addComponentListener(new java.awt.event.ComponentAdapter() {
-            @Override
-            public void componentResized(java.awt.event.ComponentEvent e) {
-                int w = btnBanVe.getWidth();
-                int h = btnBanVe.getHeight();
-                Image scaled = img_banVe.getScaledInstance(w, h, Image.SCALE_SMOOTH);
-                btnBanVe.setIcon(new ImageIcon(scaled));
-            }
-        });
-        btnXemThongKe.addComponentListener(new java.awt.event.ComponentAdapter() {
-            @Override
-            public void componentResized(java.awt.event.ComponentEvent e) {
-                int w = btnXemThongKe.getWidth();
-                int h = btnXemThongKe.getHeight();
-                Image scaled = img_thongKe.getScaledInstance(w, h, Image.SCALE_SMOOTH);
-                btnXemThongKe.setIcon(new ImageIcon(scaled));
-            }
-        });
+        btnPhim = new JButton("Danh sách phim");
+        btnPhim.setMaximumSize(sizeBtnWest);
+        btnPhim.setBackground(Color.RED);
+        btnPhim.setForeground(Color.WHITE);
+        btnPhim.setFont(fBtnName);
 
-        Font fButton = new Font("Arial", Font.BOLD, 20);
-        btnBanVe.setFont(fButton);
-        btnBanBapNuoc.setFont(fButton);
-        btnXemThongKe.setFont(fButton);
-        btnTaiKhoan.setFont(fButton);
+        btnLichChieu = new JButton("Lịch chiếu");
+        btnLichChieu.setMaximumSize(sizeBtnWest);
+        btnLichChieu.setBackground(Color.RED);
+        btnLichChieu.setForeground(Color.WHITE);
+        btnLichChieu.setFont(fBtnName);
 
+        btnNhanVien = new JButton("Nhân viên");
+        btnNhanVien.setMaximumSize(sizeBtnWest);
+        btnNhanVien.setBackground(Color.RED);
+        btnNhanVien.setForeground(Color.WHITE);
+        btnNhanVien.setFont(fBtnName);
         // Thêm vào panel
-        pCenter.add(btnBanVe);
-        pCenter.add(btnBanBapNuoc);
-        pCenter.add(btnXemThongKe);
-        pCenter.add(btnTaiKhoan);
+        pWest_btn.add(btnBanVe);
+        pWest_btn.add(Box.createVerticalStrut(15));
 
-        // Thêm vào background chính
-        add(pCenter, BorderLayout.CENTER);
-        btnBanVe.addActionListener(e -> banVe());
-        btnBanBapNuoc.addActionListener(e -> banBapNuoc());
-        btnXemThongKe.addActionListener(e -> xemThongKe());
-        btnTaiKhoan.addActionListener(e -> taiKhoan());
+        pWest_btn.add(btnPhim);
+        pWest_btn.add(Box.createVerticalStrut(15));
 
+        pWest_btn.add(btnLichChieu);
+        pWest_btn.add(Box.createVerticalStrut(15));
+
+        pWest_btn.add(btnBanBapNuoc);
+        pWest_btn.add(Box.createVerticalStrut(15));
+
+        pWest_btn.add(btnXemThongKe);
+        pWest_btn.add(Box.createVerticalStrut(15));
+
+        pWest_btn.add(btnNhanVien);
+        pWest_btn.add(Box.createVerticalStrut(15));
+
+        pWest_btn.add(btnTaiKhoan);
+
+        pWest.add(Box.createHorizontalStrut(5));
+        pWest.add(pWest_btn);
+        pWest.add(Box.createHorizontalStrut(5));
+
+        // pCenter
+        JPanel pCenter = new JPanel(new BorderLayout());
+        icon_bg = new ImageIcon(getClass().getResource("/img/backGround.jpg"));
+        lbl_bg = new JLabel(icon_bg);
+        pCenter.add(lbl_bg, BorderLayout.CENTER);
+
+        //add sự kiện
+        btnBanVe.addActionListener(e -> banVeUI());
+        btnBanBapNuoc.addActionListener(e -> banBapNuocUI());
+        btnXemThongKe.addActionListener(e -> xemThongKeUI());
+        btnTaiKhoan.addActionListener(e -> taiKhoanUI());
+        btnLichChieu.addActionListener(e -> lichChieuUI());
+        btnNhanVien.addActionListener(e -> nhanVienUI());
+        btnPhim.addActionListener(e -> danhSachPhimUI());
+        
+        // pSouth
         JPanel pSouth = new JPanel();
         btnLogOut = new JButton("Đăng xuất");
         btnHelp = new JButton("Trợ giúp");
@@ -131,16 +150,28 @@ public class Home extends JFrame {
         pSouth.add(btnLogOut);
         pSouth.add(btnHelp);
         pSouth.add(btnClose);
-        add(pSouth, BorderLayout.SOUTH);
+        //add sự kiện
         btnLogOut.addActionListener(e -> logout());
         btnHelp.addActionListener(e -> help());
         btnClose.addActionListener(e -> close());
+        // Thêm vào background chính
+        add(pNorth, BorderLayout.NORTH);
+        add(pCenter, BorderLayout.CENTER);
+        add(pWest, BorderLayout.WEST);
+        add(pSouth, BorderLayout.SOUTH);
     }
 
     private void logout() {
-        dispose();
-        Login login = new Login();
-        login.setVisible(true);
+        int result = JOptionPane.showConfirmDialog(this,
+                "Bạn chắc chắn muốn đăng xuất",
+                "Xác nhận đăng xuất",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            dispose();
+            Login login = new Login();
+            login.setVisible(true);
+        }
     }
 
     private void close() {
@@ -148,28 +179,40 @@ public class Home extends JFrame {
     }
 
     private void help() {
-        JOptionPane.showMessageDialog(this, "Hello world", "Trợ giúp", JOptionPane.INFORMATION_MESSAGE);
+        String helpText = "Mọi chi tiết xin liên hệ quản lí hệ thống - Chí Tâm\nSđt: 0347269410";
+        JOptionPane.showMessageDialog(this, helpText, "Trợ giúp", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private void banBapNuoc() {
+    private void banBapNuocUI() {
         dispose();
         // chuyển qua giao diện bán bắp nước
 
     }
 
-    private void banVe() {
+    private void banVeUI() {
         dispose();
         // chuyển giao diện bán vé
     }
 
-    private void xemThongKe() {
+    private void xemThongKeUI() {
         dispose();
         // chuyển giao diện thống kê
     }
 
-    private void taiKhoan() {
+    private void taiKhoanUI() {
         dispose();
         // chuyển giao diện tài khoản
     }
-
+    private void danhSachPhimUI(){
+        dispose();
+        //Chuyển giao diện danh sách phim
+    }
+    private void lichChieuUI(){
+        dispose();
+        //Chuyển giao diện danh lịch chiếu
+    }
+    private void nhanVienUI(){
+        dispose();
+        //Chuyển giao diện nhân viên
+    }
 }

@@ -63,8 +63,6 @@ public class Login extends JFrame {
         
      // Sự kiện tick checkbox
         chkShowPass.addActionListener(e -> checkMk(chkShowPass));
-        
-        
 
         // ===== Buttons =====
      // Panel chứa nút
