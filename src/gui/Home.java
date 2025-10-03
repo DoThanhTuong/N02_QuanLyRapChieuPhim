@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -16,12 +14,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 
 public class Home extends JFrame {
-    // kích thước cửa sổ chuẩn cho chương trình
+    // Biến toàn cục cho chương trình nhớ
+    //kích thước của sổ
     public static Dimension sizeConsole = new Dimension(900, 630);
-    private String str_cmpName = "Hệ thống Absolution Cinema";
+    //tên ứng dụng
+    public static String nameApp = "Hệ thống Absolution Cinema";
+    //kích thước nút bấm trái
+    public static Dimension sizeBtnWest = new Dimension(150, 50);
+
     private JButton btnBanVe;
     private JButton btnBanBapNuoc;
     private JButton btnXemThongKe;
@@ -31,7 +33,6 @@ public class Home extends JFrame {
     private JButton btnClose;
     private JButton btnPhim, btnNhanVien, btnLichChieu;
 
-    public Dimension sizeBtnWest = new Dimension(150, 50);
     private Font fCmpName;
     private Font fBtnName;
     private ImageIcon icon_bg;
@@ -45,7 +46,7 @@ public class Home extends JFrame {
         setResizable(false);
         // North
         JPanel pNorth = new JPanel();
-        JLabel lbl_cmpName = new JLabel(str_cmpName, SwingConstants.CENTER);
+        JLabel lbl_cmpName = new JLabel(nameApp, SwingConstants.CENTER);
         fCmpName = new Font("Arial", Font.BOLD, 30);
         lbl_cmpName.setFont(fCmpName);
         lbl_cmpName.setForeground(Color.yellow);
@@ -134,13 +135,13 @@ public class Home extends JFrame {
         pCenter.add(lbl_bg, BorderLayout.CENTER);
 
         //add sự kiện
-        btnBanVe.addActionListener(e -> banVeUI());
-        btnBanBapNuoc.addActionListener(e -> banBapNuocUI());
-        btnXemThongKe.addActionListener(e -> xemThongKeUI());
-        btnTaiKhoan.addActionListener(e -> taiKhoanUI());
-        btnLichChieu.addActionListener(e -> lichChieuUI());
-        btnNhanVien.addActionListener(e -> nhanVienUI());
-        btnPhim.addActionListener(e -> danhSachPhimUI());
+        btnBanVe.addActionListener(e -> UIManager.OpenBanVeUI(this));
+        btnBanBapNuoc.addActionListener(e -> UIManager.OpenBanBapNuocUI(this));
+        btnXemThongKe.addActionListener(e -> UIManager.OpenXemThongKeUI(this));
+        btnTaiKhoan.addActionListener(e -> UIManager.OpenTaiKhoanUI(this));
+        btnLichChieu.addActionListener(e -> UIManager.OpenLichChieuUI(this));
+        btnNhanVien.addActionListener(e -> UIManager.OpenNhanVienUI(this));
+        btnPhim.addActionListener(e -> UIManager.OpenDanhSachPhimUI(this));
         
         // pSouth
         JPanel pSouth = new JPanel();
@@ -153,7 +154,7 @@ public class Home extends JFrame {
         //add sự kiện
         btnLogOut.addActionListener(e -> logout());
         btnHelp.addActionListener(e -> help());
-        btnClose.addActionListener(e -> close());
+        btnClose.addActionListener(e -> System.exit(0));
         // Thêm vào background chính
         add(pNorth, BorderLayout.NORTH);
         add(pCenter, BorderLayout.CENTER);
@@ -174,45 +175,9 @@ public class Home extends JFrame {
         }
     }
 
-    private void close() {
-        System.exit(0);
-    }
-
     private void help() {
         String helpText = "Mọi chi tiết xin liên hệ quản lí hệ thống - Chí Tâm\nSđt: 0347269410";
         JOptionPane.showMessageDialog(this, helpText, "Trợ giúp", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private void banBapNuocUI() {
-        dispose();
-        // chuyển qua giao diện bán bắp nước
-
-    }
-
-    private void banVeUI() {
-        dispose();
-        // chuyển giao diện bán vé
-    }
-
-    private void xemThongKeUI() {
-        dispose();
-        // chuyển giao diện thống kê
-    }
-
-    private void taiKhoanUI() {
-        dispose();
-        // chuyển giao diện tài khoản
-    }
-    private void danhSachPhimUI(){
-        dispose();
-        //Chuyển giao diện danh sách phim
-    }
-    private void lichChieuUI(){
-        dispose();
-        //Chuyển giao diện danh lịch chiếu
-    }
-    private void nhanVienUI(){
-        dispose();
-        //Chuyển giao diện nhân viên
-    }
 }

@@ -111,11 +111,7 @@ public class Login extends JFrame {
 
         if (user.equals("admin") && pass.equals("123456")) {
             JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
-            dispose(); 
-            
-            // viết tiếp chuyển sang layout khác
-            Home home = new Home();
-            home.setVisible(true);
+            UIManager.OpenHomeUI(this);
             
         } else {
             JOptionPane.showMessageDialog(this, "Sai tên đăng nhập hoặc mật khẩu!", 
