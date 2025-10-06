@@ -146,8 +146,11 @@ public class Home extends JFrame {
         // pSouth
         JPanel pSouth = new JPanel();
         btnLogOut = new JButton("Đăng xuất");
+        btnLogOut.setFont(fBtnName);
         btnHelp = new JButton("Trợ giúp");
+        btnHelp.setFont(fBtnName);
         btnClose = new JButton("Đóng");
+        btnClose.setFont(fBtnName);
         pSouth.add(btnLogOut);
         pSouth.add(btnHelp);
         pSouth.add(btnClose);

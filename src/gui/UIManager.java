@@ -24,6 +24,7 @@ public class UIManager {
     }
 
     public static void OpenBanBapNuocUI(JFrame currentTab) {
+        
         currentTab.dispose();
         // chuyển qua giao diện bán bắp nước
 
