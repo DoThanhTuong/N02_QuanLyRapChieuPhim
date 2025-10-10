@@ -10,12 +10,20 @@ public class SuatChieu {
 	private LocalTime gioChieu;
 	private LocalDate ngay;
 
+	public SuatChieu(){
+		maSuatChieu = "";
+		maPhim = "";
+		maPhong = "";
+		gioChieu = LocalTime.of(0, 0);
+		ngay = LocalDate.of(0, 1, 1);
+	}
+
 	public SuatChieu(String maSuatChieu){
 		setMaSuatChieu(maSuatChieu);
 		maPhim = "";
 		maPhong = "";
 		gioChieu = LocalTime.of(0, 0);
-		ngay = LocalDate.of(0, 0, 0);
+		ngay = LocalDate.of(0, 1, 1);
 	}
 	
 

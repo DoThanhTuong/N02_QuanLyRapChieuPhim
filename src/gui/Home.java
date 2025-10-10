@@ -25,7 +25,7 @@ public class Home extends JFrame {
     public static Dimension sizeBtnWest = new Dimension(150, 50);
 
     private JButton btnBanVe;
-    private JButton btnBanBapNuoc;
+    private JButton btnCustomer;
     private JButton btnXemThongKe;
     private JButton btnTaiKhoan;
     private JButton btnLogOut;
@@ -68,11 +68,11 @@ public class Home extends JFrame {
         btnBanVe.setForeground(Color.WHITE);
         btnBanVe.setFont(fBtnName);
 
-        btnBanBapNuoc = new JButton("Bán bắp nước");
-        btnBanBapNuoc.setMaximumSize(sizeBtnWest);
-        btnBanBapNuoc.setBackground(Color.RED);
-        btnBanBapNuoc.setForeground(Color.WHITE);
-        btnBanBapNuoc.setFont(fBtnName);
+        btnCustomer = new JButton("Khách hàng");
+        btnCustomer.setMaximumSize(sizeBtnWest);
+        btnCustomer.setBackground(Color.RED);
+        btnCustomer.setForeground(Color.WHITE);
+        btnCustomer.setFont(fBtnName);
 
         btnXemThongKe = new JButton("Xem thống kê");
         btnXemThongKe.setMaximumSize(sizeBtnWest);
@@ -113,7 +113,7 @@ public class Home extends JFrame {
         pWest_btn.add(btnLichChieu);
         pWest_btn.add(Box.createVerticalStrut(15));
 
-        pWest_btn.add(btnBanBapNuoc);
+        pWest_btn.add(btnCustomer);
         pWest_btn.add(Box.createVerticalStrut(15));
 
         pWest_btn.add(btnXemThongKe);
@@ -136,7 +136,7 @@ public class Home extends JFrame {
 
         //add sự kiện
         btnBanVe.addActionListener(e -> UIManager.OpenBanVeUI(this));
-        btnBanBapNuoc.addActionListener(e -> UIManager.OpenBanBapNuocUI(this));
+        btnCustomer.addActionListener(e -> UIManager.OpenBanBapNuocUI(this));
         btnXemThongKe.addActionListener(e -> UIManager.OpenXemThongKeUI(this));
         btnTaiKhoan.addActionListener(e -> UIManager.OpenTaiKhoanUI(this));
         btnLichChieu.addActionListener(e -> UIManager.OpenLichChieuUI(this));

@@ -41,11 +41,11 @@ public class QuanLySuatChieu_DAO {
         return danhSachSuatChieu.get(index);
     }
 
-    //About this method: lấy tất cả suất chiếu của mã phim trong mảng
-    public ArrayList<SuatChieu> getSuatChieuPhim(String maPhim){ 
+    //lấy tất cả suất chiếu có chứa mã phim Input
+    public ArrayList<SuatChieu> getSuatChieuByMaPhim(String maPhim){ 
         ArrayList<SuatChieu> suatChieus = new ArrayList<>();
         for (SuatChieu suatChieu : danhSachSuatChieu) {
-            if(suatChieu.getMaPhim().equals(maPhim)){
+            if(suatChieu.getMaPhim().equalsIgnoreCase(maPhim)){
                 suatChieus.add(suatChieu);
             }
         }

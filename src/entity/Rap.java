@@ -7,10 +7,12 @@ public class Rap {
 	public Rap(String maRap){
 		setMaRap(maRap);
 		soLuongGhe = 0;
+		tenRap = "";
 	}
 	public Rap(String maRap, int soLuongGhe, String tenRap){
 		setMaRap(maRap);
 		setSoLuongGhe(soLuongGhe);
+		setTenRap(tenRap);
 	}
 	public String getMaRap() {
 		return maRap;
